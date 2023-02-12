@@ -5,25 +5,9 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/App.js"></script>
 	
-	<script type="text/javascript">  // This is the script for the banner slider
-		$(document).ready(function() {
-			$('#slider').s3Slider({
-				timeOut: 6000
-			});
-		});
-	</script>
-    
-    <script type="text/javascript" language="javascript">
-		$(document).ready(function(){
-		$(document).bind("contextmenu",function(e){
-			return false;
-		});
-		});
-	</script> 
+	
 
     <link href="css/styles.css" rel="stylesheet" type="text/css" media="screen">
-	<link href="css/print.css" rel="stylesheet" type="text/css" media="print">
-	<link href="css/slider.css" rel="stylesheet" type="text/css" media="screen">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Type" content="cache" />
@@ -76,7 +60,7 @@ function MM_swapImage() { //v3.0
 </script>
 </head>
 
-<body onLoad="MM_preloadImages('images/small5.jpg','images/small6.jpg')">
+<body style="margin-top: 15px;">
 
 <div id="outer">
 
@@ -98,12 +82,28 @@ function MM_swapImage() { //v3.0
   
 	
         <div id="content">
-		Data
+			<ol style="margin-bottom: 20px;"></ol>
+
+			<script>
+				fetch('https://swapi.dev/api/people')
+				.then(res => {
+					return res.json();
+				})
+				.then(data => {
+					people = data.results;
+				console.log(data.results);
+				//console.log(people)
+				people.forEach(people => {
+					const markup = `<li style="margin-left:10px; bgcolor:orange;border-bottom: 1px solid gray; padding:10px;border-radius:2px;"><b>Name:</b> ${people.name}  , <b>Height</b>: ${people.height}} , <b>Mass</b>: ${people.mass}</li>`;
+					document.querySelector('ol').insertAdjacentHTML('beforeend',markup);
+				});
+				
+				})
+				.catch(error=> console.log(error));
+			</script>
 		</div>
             
-        <div id="rightside">
-        Right Side
-        </div>
+        
 	
 		<div id="footer">
 			<p class="footer-text">Nawroz Salehi Feb,2023</p>

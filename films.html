@@ -31,7 +31,7 @@
     <!-- End Google Analytics Code -->
 </head>
 
-<body>
+<body style="margin-top: 15px;">
 
 <div id="outer">
 
@@ -53,13 +53,27 @@
 		  
 	
         <div id="content">
-		Text
+    			
+			<ol style="margin-bottom: 20px;"></ol>
+
+			<script>
+				fetch('https://swapi.dev/api/films')
+				.then(res => {
+					return res.json();
+				})
+				.then(data => {
+					film = data.results;
+				console.log(data.results);
+				//console.log(film)
+				film.forEach(name => {
+					const markup = `<li style="margin-left:10px; bgcolor:orange;border-bottom: 1px solid gray; padding:10px;">${name.title}, <b>Director</b>: ${name.director}} , <b>Producer</b>: ${name.producer}</li>`;
+					document.querySelector('ol').insertAdjacentHTML('beforeend',markup);
+				});
+				
+				})
+				.catch(error=> console.log(error));
+			</script>
 		</div>
-            
-        <div id="rightside">
-        <h2>Latest News</h2>
-           
-        </div>
 	
 		<div id="footer">
 			<p class="footer-text">Nawroz Salehi Feb,2023</p>
